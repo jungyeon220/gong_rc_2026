@@ -1,1 +1,267 @@
-<h1>나는 김정연입니다. 텍스트</h1>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김정연 | gong_rc_2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #21262d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #2ea043;
+    --glow: rgba(88, 166, 255, 0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    background:
+      radial-gradient(circle at 20% 30%, var(--glow), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(46,160,67,0.1), transparent 40%);
+  }
+  .grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.25;
+    mask-image: radial-gradient(circle at center, black, transparent 75%);
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--accent2);
+    border: 1px solid var(--accent2);
+    border-radius: 999px;
+    padding: 0.25rem 0.9rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    background: rgba(46,160,67,0.08);
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(120deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero .sub {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+  .hero .typed {
+    font-family: "SF Mono", "Consolas", monospace;
+    color: var(--accent);
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    min-height: 1.5rem;
+  }
+  .cursor { animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted); font-size: 0.85rem;
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,8px);} }
+
+  /* Sections */
+  section { max-width: 860px; margin: 0 auto; padding: 5rem 1.5rem; }
+  .section-title {
+    font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-title::before {
+    content: ""; width: 4px; height: 1.6rem;
+    background: var(--accent); border-radius: 2px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.8rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+  .about p { color: var(--muted); margin-bottom: 1rem; }
+  .about strong { color: var(--text); }
+
+  /* Info grid */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; }
+  .info-grid .card .label { font-size: 0.8rem; color: var(--accent); margin-bottom: 0.3rem; }
+  .info-grid .card .value { font-size: 1.05rem; font-weight: 600; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ""; position: absolute; left: 0.4rem; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .t-item { position: relative; padding-bottom: 1.6rem; }
+  .t-item::before {
+    content: ""; position: absolute; left: -1.65rem; top: 0.45rem;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--accent);
+  }
+  .t-item.done::before { background: var(--accent2); border-color: var(--accent2); }
+  .t-num { font-family: monospace; color: var(--accent); font-size: 0.85rem; }
+  .t-text { font-weight: 600; }
+
+  /* Skills */
+  .skills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .chip {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.9rem;
+    font-family: monospace; color: var(--text);
+    transition: all 0.2s;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Repo card */
+  .repo a { color: var(--accent); text-decoration: none; word-break: break-all; }
+  .repo a:hover { text-decoration: underline; }
+  .repo .meta { display: flex; gap: 1.5rem; margin-top: 1rem; color: var(--muted); font-size: 0.85rem; flex-wrap: wrap; }
+  .repo .meta span::before { content: "● "; color: var(--accent); }
+  .lang-bar { height: 8px; border-radius: 4px; overflow: hidden; display: flex; margin-top: 1.2rem; }
+  .lang-bar .py { background: #3572A5; width: 99%; }
+  .lang-bar .html { background: #e34c26; width: 1%; }
+
+  footer { text-align: center; padding: 3rem 1rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+  .reveal.show { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="grid-bg"></div>
+    <div class="hero-content">
+      <span class="badge">공주대학교 · AUTOCAR PROJECT 2026</span>
+      <h1>김정연</h1>
+      <p class="sub">지능형모빌리티공학과 · 자율주행을 향한 한 걸음</p>
+      <p class="typed"><span id="typed-text"></span><span class="cursor">_</span></p>
+    </div>
+    <div class="scroll-hint">↓ scroll</div>
+  </header>
+
+  <section class="about reveal">
+    <h2 class="section-title">About</h2>
+    <div class="card">
+      <p>안녕하다. <strong>autocar 프로젝트</strong>를 통해 자율주행 RC카를 직접 만들고 제어하는 수업을 듣고 있는 공주대학교 지능형모빌리티공학과 학생 <strong>김정연</strong>이다.</p>
+      <p>Python 기초부터 시작해 영상처리, 제어, 그리고 실제 차량 동역학까지, 모빌리티를 움직이게 하는 모든 단계를 코드와 수식으로 차근차근 익혀 나가고 있다.</p>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="section-title">Profile</h2>
+    <div class="info-grid">
+      <div class="card"><div class="label">NAME</div><div class="value">김정연</div></div>
+      <div class="card"><div class="label">FIELD</div><div class="value">지능형모빌리티공학과</div></div>
+      <div class="card"><div class="label">PROJECT</div><div class="value">autocar (RC)</div></div>
+      <div class="card"><div class="label">YEAR</div><div class="value">2026</div></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="section-title">수업 진도 (2026.06.22)</h2>
+    <div class="timeline">
+      <div class="t-item done"><div class="t-num">1교시</div><div class="t-text">수업 오리엔테이션</div></div>
+      <div class="t-item done"><div class="t-num">2교시</div><div class="t-text">WSL2 설치, VS Code 설치</div></div>
+      <div class="t-item done"><div class="t-num">3교시</div><div class="t-text">git 설치, GitHub 계정 만들기</div></div>
+      <div class="t-item done"><div class="t-num">4교시</div><div class="t-text">Python 기초</div></div>
+      <div class="t-item done"><div class="t-num">5교시</div><div class="t-text">print 함수 해석</div></div>
+      <div class="t-item done"><div class="t-num">6교시</div><div class="t-text">변수와 자료형</div></div>
+      <div class="t-item done"><div class="t-num">7교시</div><div class="t-text">연산자와 표현식, input 함수 해석</div></div>
+      <div class="t-item"><div class="t-num">8교시</div><div class="t-text">문자열 f-string, format</div></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills">
+      <span class="chip">Python</span>
+      <span class="chip">OpenCV</span>
+      <span class="chip">Git / GitHub</span>
+      <span class="chip">VS Code</span>
+      <span class="chip">제어시스템</span>
+      <span class="chip">영상처리</span>
+      <span class="chip">차량동역학</span>
+      <span class="chip">MATLAB</span>
+    </div>
+  </section>
+
+  <section class="repo reveal">
+    <h2 class="section-title">Project Repository</h2>
+    <div class="card">
+      <a href="https://github.com/jungyeon220/gong_rc_2026" target="_blank">github.com/jungyeon220/gong_rc_2026</a>
+      <p style="color:var(--muted); margin-top:0.6rem;">공주대에서 autocar를 가지고 하는 프로젝트 수업</p>
+      <div class="lang-bar"><div class="py"></div><div class="html"></div></div>
+      <div class="meta">
+        <span>Python 99.0%</span>
+        <span>HTML 1.0%</span>
+        <span>Apache-2.0</span>
+        <span>11 Commits</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 김정연 · gong_rc_2026 · 공주대학교
+  </footer>
+
+<script>
+  // Typewriter
+  const phrases = ["print('Hello, autocar!')", "import cv2", "while driving: keep_learning()"];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typed-text');
+  function type() {
+    const cur = phrases[pi];
+    if (!deleting) {
+      el.textContent = cur.slice(0, ++ci);
+      if (ci === cur.length) { deleting = true; return setTimeout(type, 1600); }
+    } else {
+      el.textContent = cur.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 40 : 80);
+  }
+  type();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(s => io.observe(s));
+</script>
+</body>
+</html>
