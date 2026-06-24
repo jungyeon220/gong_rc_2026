@@ -1,5 +1,17 @@
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 def rec_fac(n):
     if n == 1:
         return 1
@@ -14,3 +26,5 @@ if __name__ == "__main__":
     main()
 
 
+cnt = 0
+dic_cnt = 0
