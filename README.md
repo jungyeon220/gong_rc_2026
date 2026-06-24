@@ -34,3 +34,17 @@
 5교시: list, list 메소드, 바인딩, pyi
 6교시: list method(pop, del, remove)
 7교시: for, range, enumerate, zip
+8교시:
+
+------
+2026-06-24
+------
+
+1교시: 
+2교시: 
+3교시: 
+4교시: 
+5교시: 
+6교시: 
+7교시: 
+8교시:
