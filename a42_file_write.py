@@ -1,0 +1,12 @@
+from pathlib import Path
+
+def main():
+    print(Path(__file__).parent)
+    f = open(Path(__file__).parent / "text.txt", "w")
+    f.write("안녕하세요\n")
+    f.close()
+    
+
+
+if __name__ == "__main__":
+    main()
